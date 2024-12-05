@@ -1,9 +1,22 @@
 use std::env;
+use actix_web::{get, HttpResponse, Responder, HttpServer, App};
 
-fn main() {
-    // println!("Hello, world!");
-    let print_env = env::var("PRINT_ENV").unwrap().to_string();
-    let endpoint = env::var("ENDPOINT").unwrap().to_string();
-    let port = env::var("PORT").unwrap().to_string();
-    println!("{}:{}:{}", print_env, endpoint, port);
+#[get("/")]
+async fn hello() -> impl Responder {
+    let print_env = env::var("PRINT_ENV").ok().unwrap();
+    let endpoint = env::var("ENDPOINT").ok().unwrap();
+    let port = env::var("PORT").ok().unwrap();
+    let response_text = format!("{}:{}:{}", print_env, endpoint, port);
+    HttpResponse::Ok().body(response_text)
+}
+
+#[actix_web::main]
+async fn main() -> std::io::Result<()> {
+    HttpServer::new(|| {
+        App::new()
+            .service(hello)
+    })
+    .bind(("127.0.0.1", 8080))?
+    .run()
+    .await
 }

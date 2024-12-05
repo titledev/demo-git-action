@@ -8,3 +8,7 @@ cargo build --release
 
 # Run the application
 ./target/release/rust-demo
+
+# Push the image to the registry
+docker build -t rust-demo .
+docker push rust-demo:latest

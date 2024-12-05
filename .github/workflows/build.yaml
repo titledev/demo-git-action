@@ -19,6 +19,7 @@ jobs:
         run: cargo build --release
       - name: Test
         run: cargo test
+        
       - name: Deploy
         run: echo "Deploying to production"
     
