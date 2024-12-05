@@ -13,6 +13,8 @@ jobs:
         with:
           toolchain: stable
           override: true
+      - name: Set up Env
+        run: export PRINT_ENV=Dev ENDPOINT=srv+mongodb://nongkai.com PORT=5000
       - name: Build
         run: cargo build --release
       - name: Test
