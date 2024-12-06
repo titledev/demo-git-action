@@ -7,6 +7,7 @@ async fn hello() -> impl Responder {
     let endpoint = env::var("ENDPOINT").ok().unwrap();
     let port = env::var("PORT").ok().unwrap();
     let response_text = format!("{}:{}:{}", print_env, endpoint, port);
+    println!("{}", response_text);
     HttpResponse::Ok().body(response_text)
 }
 
