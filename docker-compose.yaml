@@ -1,0 +1,13 @@
+version: "3.8"
+
+services:
+  rust-demo:
+    build:
+      context: ./
+    image: titleleadteam/demo-rust:latest
+    ports:
+      - "8080:8080"
+    environment:
+      - PRINT_ENV=Dev
+      - ENDPOINT=localhost
+      - PORT=8080
